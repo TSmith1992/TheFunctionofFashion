@@ -20,6 +20,7 @@ Each product appears on its own card with the following properties:
 -   Review section
 -   If exclusive for Prime Members
 -   Class Name
+-   No. of likes a product has received
 
 Page will have sections: 
 -  Header/Title Banner
@@ -31,3 +32,4 @@ Stretch Goals:
 - Filters/Dropdowns for Price, Rating, and Exclusivity for Prime Members
 - Ability to highlight/showcase a product
 - Add a search bar 
+- Dislike button that lowers the number of likes each piece of clothing has
