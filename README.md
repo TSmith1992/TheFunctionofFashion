@@ -28,6 +28,6 @@ Page will have sections:
 
 Stretch Goals:
 
--Filters/Dropdowns for Price, Rating, and Exclusivity for Prime Members
--Ability to highlight/showcase a product
--Add a search bar 
+- Filters/Dropdowns for Price, Rating, and Exclusivity for Prime Members
+- Ability to highlight/showcase a product
+- Add a search bar 
