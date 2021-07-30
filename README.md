@@ -7,10 +7,10 @@ We will also try and include the ability to add comments/reviews for the clothin
 
 API = https://rapidapi.com/axesso/api/axesso-amazon-data-service1/ (LookupSellerProducts)
 
-=Deliverables=
+Deliverables:
 
 - Ensure products appear on page
-- Each product appears on its own card with the following properties: 
+Each product appears on its own card with the following properties: 
 -   Title of product
 -   Description
 -   Review Count
@@ -21,12 +21,12 @@ API = https://rapidapi.com/axesso/api/axesso-amazon-data-service1/ (LookupSeller
 -   If exclusive for Prime Members
 -   Class Name
 
-- Page will have sections: 
+Page will have sections: 
 -  Header/Title Banner
 -  Product Collection
 -  User's "Shopping Bag" with price total
 
-=Stretch Goals= 
+Stretch Goals:
 
 -Filters/Dropdowns for Price, Rating, and Exclusivity for Prime Members
 -Ability to highlight/showcase a product
