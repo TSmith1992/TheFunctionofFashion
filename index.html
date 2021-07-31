@@ -8,13 +8,27 @@
     <body>
         <div id='title-banner'>
             <h1>Please choose below to clothes you want!</h1>
-            <h3>Protip: Use the filters below!</h3>
             <h1 hidden id='Thank-you'>Thank you for your purchase! </h1>
+            <h3>Protip: Use the filters below!</h3>
+            <label for='clothingprice'>Choose Price Range:</label>
+            <select name='clothingprice' class='dropdown'>
+                <option value='Low'>Low</option>
+                <option value='Medium'>Medium</option>
+                <option value='High'>High</option>
+                <option value='All'>All</option>
+            </select>
+            <br><br>
+            <label for='forPrime'>Choose to see Products Exclusive for Prime Members:</label>
+            <select name='forPrime' class='dropdown'>
+                <option value='Yes'>Yes</option>
+                <option value='No'>No</option>
+            </select>
+            <br><br>
         </div>
         <div id='products-container'>
 
         </div>
-        <div>
+        <div id='shopping-bag'>
             <h2>Your Shopping Bag</h2>
             <h5>See Below What You'd Like to Purchase</h5>
             <p id='total-price'>Total:</p>

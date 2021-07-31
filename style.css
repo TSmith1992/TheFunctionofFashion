@@ -1,0 +1,42 @@
+body{
+    background-color: beige;
+}
+#title-banner{
+    background-color: lightskyblue;
+    background-image: url('https://www.bergerpaints.com/colour-magazine/Upload/Posting/Image/colours-fashion-banner-mar15.jpg');
+    background-size:contain;
+    text-align: center;
+}
+
+#title-banner>h1,h3{
+    font-style: italic;
+}
+
+#title-banner>h3{
+    text-align: left;
+}
+
+#title-banner>label{
+    text-align: left;
+    float: left;
+}
+
+#title-banner>.dropdown{
+    text-align: left;
+    float: left;
+}
+
+#Thank-you{
+    color: yellow;
+    font-style: italic;
+}
+
+#products-container{
+    background-image: url('https://static.onecms.io/wp-content/uploads/sites/23/2018/03/19/affordable-work-clothes-1.jpg') ;
+    background-size:contain;
+}
+
+#shopping-bag{
+    background-image: url('https://static.onecms.io/wp-content/uploads/sites/23/2013/12/12/best-day-after-christmas-sales-shopping-guide-how-to.jpg');
+    background-size: contain;
+}
