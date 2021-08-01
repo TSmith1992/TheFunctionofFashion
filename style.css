@@ -12,6 +12,15 @@ body{
     font-style: italic;
 }
 
+#title-banner>img{
+    width: 10%;
+    height: 10%;
+    float: right;
+    left: 0;
+    position: relative;
+    top: -50px
+}
+
 #title-banner>h3{
     text-align: left;
 }
@@ -39,4 +48,19 @@ body{
 #shopping-bag{
     background-image: url('https://static.onecms.io/wp-content/uploads/sites/23/2013/12/12/best-day-after-christmas-sales-shopping-guide-how-to.jpg');
     background-size: contain;
+    color: black;
+	font-size: 20px;
+    text-shadow: beige;
+}
+
+#shopping-bag>h2{
+    text-align: center;
+    color: rgb(34, 34, 8);
+	font-size: 20px;
+    text-shadow: black;
+}
+
+#total-price{
+    font-size: 35px;
+    color:blue;
 }
