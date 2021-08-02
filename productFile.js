@@ -2,7 +2,7 @@ const productList =[
     {
     "asin":"B00M7FMKAY",
     "countReview":614,
-    "imgUrl":"https://m.media-amazon.com/images/I/91G9U61kjWL._AC_UY218_.jpg",
+    "imgUrl":'https://m.media-amazon.com/images/I/91G9U61kjWL._AC_UY218_.jpg',
     "price":39.99,
     "prime":true,
     "productDescription":"DailyShoes Women's Ankle Bootie High Lace up Military Combat Mid Calf Credit Card Knife Money Wallet Pocket Boots",
