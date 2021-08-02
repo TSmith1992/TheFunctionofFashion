@@ -21,6 +21,7 @@ function showProducts(product){
 
 
     productCard.setAttribute('id',`product ${product.asin}`);
+    productCard.setAttribute('class','product-card')
     productImg.src=`${product.imgUrl}`;
     productRating.innerText=`${product.productRating}`;
     productPrice.innerText=`Price: $${product.price}`;
