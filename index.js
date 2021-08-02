@@ -21,7 +21,7 @@ function showProducts(product){
 
 
     productCard.setAttribute('id',`product ${product.asin}`);
-    productImg.src=`${product.imgURL}`;
+    productImg.src=`${product.imgUrl}`;
     productRating.innerText=`${product.productRating}`;
     productPrice.innerText=`Price: $${product.price}`;
     productPrime.innerText ='Is this product exclusive for PRIME Members? ' + forPrimeMembers();
@@ -43,3 +43,4 @@ function forPrimeMembers(){
 
 init()
 
+//ctrl shift n
