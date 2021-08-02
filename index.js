@@ -23,6 +23,15 @@ function productRender() {
     console.log("hello")
 }
 function showProducts(product) {
+    const pContainer = document.getElementById('products-container')
+    const productCard = document.createElement('div');
+    const lineBreak = document.createElement('hr')
+    const productImg = document.createElement('img');
+    const productRating = document.createElement('p');
+    const productPrice = document.createElement('p');
+    const productPrime = document.createElement('p');
+    const productDescript = document.createElement('span');
+    const productBuyButton = document.createElement('button');
 
     productCard.setAttribute('id', `product ${product.asin}`);
     productCard.setAttribute('class', 'product-card')
