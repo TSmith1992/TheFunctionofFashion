@@ -33,6 +33,10 @@ function showProducts(product) {
     const productBuyButton = document.createElement('button');
     const onlyPrimeProds = document.getElementById('prime-btn');
     const allProds = document.getElementById('all-btn');
+    const lowRangebtn = document.getElementById('low-range');
+    const midRangebtn = document.getElementById('mid-range');
+    const highRangebtn = document.getElementById('high-range');
+    const allRangebtn = document.getElementById('all-range');
 
     productCard.setAttribute('id', `product ${product.asin}`);
     productCard.setAttribute('class', 'product-card')
@@ -47,13 +51,6 @@ function showProducts(product) {
     productCard.append(productImg, productRating, productPrice, productPrime, productDescript, productBuyButton, lineBreak)
     pContainer.appendChild(productCard)
 
-
-
-    productBuyButton.addEventListener("click", function (e) {
-        const shoppingCart = document.querySelector("#shopping-bag")
-        const newCard = e.target.productCard
-        shoppingCart.append(newCard)
-    })
     function primeCheck(){
         if (product.prime){
             return 'Yes'
@@ -62,6 +59,33 @@ function showProducts(product) {
         }
     }
 
+    productBuyButton.addEventListener("click", function (e) {
+        const shoppingCart = document.querySelector("#shopping-bag")
+        const newCard = e.target.productCard
+        shoppingCart.append(newCard)
+    })
+
+    lowRangebtn.addEventListener('click', e =>{
+        if (product.price > 15){
+         productCard.style ='display : none'
+        }
+    })
+
+    midRangebtn.addEventListener('click', e =>{
+        if (product.price <= 15 && product.price > 30){
+         productCard.style ='display : none'
+        }
+    })
+
+    highRangebtn.addEventListener('click', e =>{
+        if (product.price <= 30){
+         productCard.style ='display : none'
+        }
+    })
+
+    allRangebtn.addEventListener('click', e =>{
+         productCard.style =''
+    })
     onlyPrimeProds.addEventListener('click', e =>{
         if (productPrime.innerText=='Is this product exclusive for PRIME Members? Yes'){
         productCard.style ='display : none'
