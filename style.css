@@ -1,5 +1,5 @@
 body{
-    background-color: beige;
+    background-color: rgb(207, 188, 207);
 }
 #title-banner{
     background-color: lightskyblue;
@@ -32,7 +32,7 @@ body{
 
 .product-cards{
     padding: 2px 16px;
-
+    box-shadow: 0 0 3px rgba(190, 25, 25, 0.1);
 }
 
 #title-banner>.dropdown{
@@ -48,9 +48,9 @@ body{
 #products-container{
     background-image: url('https://static.onecms.io/wp-content/uploads/sites/23/2018/03/19/affordable-work-clothes-1.jpg') ;
     background-size:contain;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
 
