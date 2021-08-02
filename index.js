@@ -1,6 +1,5 @@
 function init() {
     productRender()
-    PrimeExclusive()
 }
 
 // fetch("https://axesso-axesso-amazon-data-service-v1.p.rapidapi.com/amz/amazon-seller-products?domainCode=com&sellerId=AD97MR4NOW5CD&page=1", {
@@ -20,8 +19,8 @@ function init() {
 
 function productRender() {
     productList.forEach(product => showProducts(product))
-    console.log("hello")
 }
+
 function showProducts(product) {
     const pContainer = document.getElementById('products-container')
     const productCard = document.createElement('div');
@@ -32,6 +31,8 @@ function showProducts(product) {
     const productPrime = document.createElement('p');
     const productDescript = document.createElement('span');
     const productBuyButton = document.createElement('button');
+    const onlyPrimeProds = document.getElementById('prime-btn');
+    const allProds = document.getElementById('all-btn');
 
     productCard.setAttribute('id', `product ${product.asin}`);
     productCard.setAttribute('class', 'product-card')
@@ -52,9 +53,6 @@ function showProducts(product) {
         const shoppingCart = document.querySelector("#shopping-bag")
         const newCard = e.target.productCard
         shoppingCart.append(newCard)
-
-
-
     })
     function primeCheck(){
         if (product.prime){
@@ -63,6 +61,16 @@ function showProducts(product) {
             return 'No'
         }
     }
+
+    onlyPrimeProds.addEventListener('click', e =>{
+        if (productPrime.innerText=='Is this product exclusive for PRIME Members? Yes'){
+        productCard.style ='display : none'
+        }
+    })
+
+    allProds.addEventListener('click', e =>{
+        productCard.style =''
+    })
     // const dropDown = document.getElementsByName("clothingprice")
     // dropDown.addEventListener("click", function () {
     //     const options = dropDown.querySelectorAll("option")
@@ -70,16 +78,6 @@ function showProducts(product) {
 
     //     }
     // })
-}
-
-function PrimeExclusive(){
-    const primeBtn = document.querySelector('[name="forPrime"]')
-    
-    primeBtn.addEventListener('click', e =>{
-        if (e.target.value ='Yes'){
-        
-        }
-    })
 }
 
 
