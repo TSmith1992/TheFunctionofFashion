@@ -18,6 +18,7 @@ function showProducts(product){
     const productPrime = document.createElement('p');
     const productDescript = document.createElement('span');
     const productBuyButton = document.createElement('button');
+    const buttonBreak = document.createElement('br')
 
 
     productCard.setAttribute('id',`product ${product.asin}`);
@@ -26,10 +27,10 @@ function showProducts(product){
     productRating.innerText=`${product.productRating}`;
     productPrice.innerText=`Price: $${product.price}`;
     productPrime.innerText ='Is this product exclusive for PRIME Members? ' + forPrimeMembers();
-    productDescript.innerText = product.productDescription;
+    productDescript.innerText = `${product.productDescription}.`;
     productBuyButton.innerText = 'Buy';
 
-    productCard.append(productImg,productRating,productPrice,productPrime,productDescript,productBuyButton,lineBreak)
+    productCard.append(productImg,productRating,productPrice,productPrime,productDescript,buttonBreak,productBuyButton,lineBreak)
     pContainer.appendChild(productCard)
 }
 

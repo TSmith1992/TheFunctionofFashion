@@ -30,6 +30,11 @@ body{
     float: left;
 }
 
+.product-cards{
+    padding: 2px 16px;
+
+}
+
 #title-banner>.dropdown{
     text-align: left;
     float: left;
@@ -43,6 +48,10 @@ body{
 #products-container{
     background-image: url('https://static.onecms.io/wp-content/uploads/sites/23/2018/03/19/affordable-work-clothes-1.jpg') ;
     background-size:contain;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
 #shopping-bag{
