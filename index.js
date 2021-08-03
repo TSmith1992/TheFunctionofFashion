@@ -32,7 +32,6 @@ function showProducts(product) {
     const onlyPrimeProds = document.getElementById('prime-btn');
     const allProds = document.getElementById('all-btn');
     const lowRangebtn = document.getElementById('low-range');
-    const midRangebtn = document.getElementById('mid-range');
     const highRangebtn = document.getElementById('high-range');
     const allRangebtn = document.getElementById('all-range');
 
