@@ -3,19 +3,17 @@ function init() {
 }
 
 // fetch("https://axesso-axesso-amazon-data-service-v1.p.rapidapi.com/amz/amazon-seller-products?domainCode=com&sellerId=AD97MR4NOW5CD&page=1", {
-//     "method": "GET",
-//     "headers": {
-//         "x-rapidapi-key": "84e9bccac5msh0b2a729d7675d15p134f8djsne7d94130722a",
-//         "x-rapidapi-host": "axesso-axesso-amazon-data-service-v1.p.rapidapi.com"
-//     }
+// 	"method": "GET",
+// 	"headers": {
+// 		"x-rapidapi-key": "0ea4ca4479msh35a0d514694fec8p1b3d3ejsn2f6692e1d189",
+// 		"x-rapidapi-host": "axesso-axesso-amazon-data-service-v1.p.rapidapi.com"
+// 	}
 // })
-//     .then(response => {
-//         console.log(response);
-//     })
-//     .catch(err => {
-//         console.error(err);
-//     });
-
+// .then(res => res.json())
+// .then(products => console.log(products))
+// .catch(err => {
+// 	console.error(err);
+// });
 
 function productRender() {
     productList.forEach(product => showProducts(product))
@@ -66,34 +64,35 @@ function showProducts(product) {
     })
 
     lowRangebtn.addEventListener('click', e =>{
-        if (product.price > 15){
+        if (product.price > 20){
          productCard.style ='display : none'
-        }
-    })
-
-    midRangebtn.addEventListener('click', e =>{
-        if (product.price <= 15 && product.price > 30){
-         productCard.style ='display : none'
+         lowRangebtn.style.color='purple'
         }
     })
 
     highRangebtn.addEventListener('click', e =>{
-        if (product.price <= 30){
+        if (product.price < 20){
          productCard.style ='display : none'
+         highRangebtn.style.color='purple'
         }
     })
 
     allRangebtn.addEventListener('click', e =>{
          productCard.style =''
+         lowRangebtn.style.color=''
+         highRangebtn.style.color=''
     })
+
     onlyPrimeProds.addEventListener('click', e =>{
-        if (productPrime.innerText=='Is this product exclusive for PRIME Members? Yes'){
+        if (productPrime.innerText=='Is this product exclusive for PRIME Members? No'){
         productCard.style ='display : none'
+        onlyPrimeProds.style.color='purple'
         }
     })
 
     allProds.addEventListener('click', e =>{
         productCard.style =''
+        onlyPrimeProds.style.color=''
     })
     // const dropDown = document.getElementsByName("clothingprice")
     // dropDown.addEventListener("click", function () {
