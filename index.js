@@ -1,3 +1,4 @@
+//initializer function
 function init() {
     productRender()
     imageClick()
@@ -88,13 +89,6 @@ function showProducts(product) {
         productCard.style =''
         onlyPrimeProds.style.color=''
     })
-    // const dropDown = document.getElementsByName("clothingprice")
-    // dropDown.addEventListener("click", function () {
-    //     const options = dropDown.querySelectorAll("option")
-    //     if (options === "High") {
-
-    //     }
-    // })
 }
 
 //Used to allow user to click on image in top banner to go to Shopping Cart
@@ -122,6 +116,8 @@ function navBarClicks(){
         cartSect.scrollIntoView();
     })  
 }
+
+init()
 // fetch("https://axesso-axesso-amazon-data-service-v1.p.rapidapi.com/amz/amazon-seller-products?domainCode=com&sellerId=AD97MR4NOW5CD&page=1", {
 // 	"method": "GET",
 // 	"headers": {
