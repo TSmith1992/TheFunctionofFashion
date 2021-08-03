@@ -57,6 +57,7 @@ function showProducts(product) {
         if (product.price > 20){
          productCard.style ='display : none'
          lowRangebtn.style.color='purple'
+         highRangebtn.style ='display: none'
         }
     })
 
@@ -64,6 +65,7 @@ function showProducts(product) {
         if (product.price < 20){
          productCard.style ='display : none'
          highRangebtn.style.color='purple'
+         lowRangebtn.style ='display: none'
         }
     })
 
@@ -71,6 +73,8 @@ function showProducts(product) {
          productCard.style =''
          lowRangebtn.style.color=''
          highRangebtn.style.color=''
+         lowRangebtn.style =''
+         highRangebtn.style =''
     })
 
     onlyPrimeProds.addEventListener('click', e =>{
