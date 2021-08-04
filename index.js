@@ -9,22 +9,22 @@ function init() {
 
 //iterates over product list to render
 function productRender() {
-    productList.forEach(product => showProducts(product))
+    //productList.forEach(product => showProducts(product))
+    fetch("https://axesso-axesso-amazon-data-service-v1.p.rapidapi.com/amz/amazon-seller-products?domainCode=com&sellerId=AD97MR4NOW5CD&page=1", {
+    "method": "GET",
+    "headers": {
+        "x-rapidapi-key": "0ea4ca4479msh35a0d514694fec8p1b3d3ejsn2f6692e1d189",
+        "x-rapidapi-host": "axesso-axesso-amazon-data-service-v1.p.rapidapi.com"
+    }
+})
+    .then(res => res.json())
+    .then(products => products.forEach(products.searchProductDetails))
+    .catch(err => {
+        console.error(err);
+    });
 }
 
-//Shows products on screen and adds site functionality
-// // fetch("https://axesso-axesso-amazon-data-service-v1.p.rapidapi.com/amz/amazon-seller-products?domainCode=com&sellerId=AD97MR4NOW5CD&page=1", {
-// //     "method": "GET",
-// //     "headers": {
-// //         "x-rapidapi-key": "0ea4ca4479msh35a0d514694fec8p1b3d3ejsn2f6692e1d189",
-// //         "x-rapidapi-host": "axesso-axesso-amazon-data-service-v1.p.rapidapi.com"
-// //     }
-// // })
-//     .then(res => res.json())
-//     .then(products => console.log(products))
-//     .catch(err => {
-//         console.error(err);
-//     });
+
 
 const priceArrays = []
 
