@@ -56,7 +56,7 @@ function showProducts(product) {
     productPrice.innerText = `Price: $${product.price}`;
     likeClick.innerText='👍';
     dislikeClick.innerText='👎';
-    likePhrase.innerText = likeCounter
+    likePhrase.innerText = `This product has ${likeCounter} like(s). Click the emoji to let us know what you think of it! `
     productPrime.innerText = 'Is this product exclusive for PRIME Members? ' + primeCheck();
     productDescript.innerText = product.productDescription;
     productBuyButton.innerText = 'Buy';
@@ -66,13 +66,13 @@ function showProducts(product) {
 
     likeClick.addEventListener('click',() =>{
         likeCounter++
-        return likePhrase.innerText = likeCounter
+        return likePhrase.innerHTML = `This product has ${likeCounter} like(s). Click the emoji to let us know what you think of it! `
         
     })
 
     dislikeClick.addEventListener('click',() =>{
         likeCounter--
-        return likePhrase.innerText = likeCounter
+        return likePhrase.innerText = `This product has ${likeCounter} like(s). Click the emoji to let us know what you think of it! `
     })
 
 
