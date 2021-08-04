@@ -1,11 +1,11 @@
+const priceArrays = []
+
 //initializer function
 function init() {
     productRender()
-    imageClick()
     navBarClicks()
     purchaseBox()
 }
-
 
 //iterates over product list to render
 function productRender() {
@@ -14,7 +14,6 @@ function productRender() {
     .then(products => products.forEach(showProducts))
     .catch(err => console.error(err))
 }
-const priceArrays = []
 
 function showProducts(product) {
     const pContainer = document.getElementById('products-container')
@@ -49,7 +48,7 @@ function showProducts(product) {
     productPrime.innerText = 'Is this product exclusive for PRIME Members? ' + primeCheck();
     productDescript.innerText = product.productDescription;
     productBuyButton.innerText = 'Buy';
-    productReviewCount.innerHTML = `Number of Reviews for this product: ${product.countReview}.`
+    productReviewCount.innerText = `Number of Reviews for this product: ${product.countReview}.`
 
     productCard.append(productImg, productRating, likeClick, likePhrase, dislikeClick, productDescript, productPrime, productPrice, productBuyButton, lineBreak, productReviewCount)
     pContainer.appendChild(productCard)
@@ -61,11 +60,12 @@ function showProducts(product) {
             return 'No'
         }
     }
-    
+
     likeClick.addEventListener('click',() =>{
         likeCounter++
         product.countReview++
         patchReviewCount(product)
+        productReviewCount.innerText = `Number of Reviews for this product: ${product.countReview}.`
         return likePhrase.innerHTML = `This product has ${likeCounter} like(s). Click the emoji to let us know what you think of it! `
         
     })
@@ -73,6 +73,7 @@ function showProducts(product) {
     dislikeClick.addEventListener('click',() =>{
         likeCounter--
         patchReviewCount()
+        productReviewCount.innerText = `Number of Reviews for this product: ${product.countReview}.`
         return likePhrase.innerText = `This product has ${likeCounter} like(s). Click the emoji to let us know what you think of it! `
     })
 
@@ -177,17 +178,6 @@ function navBarClicks(){
     navListCart.addEventListener('click', ()=>{
         cartSect.scrollIntoView();
     })  
-}
-
-//Used to allow user to click on image in top banner to go to Shopping Cart
-function imageClick(){
-    const cartImage = document.querySelector('img')
-    const cartBag = document.getElementById('shopping-bag')
-    
-    cartImage.addEventListener('click', () =>{
-        cartBag.scrollIntoView();
-        
-    })
 }
 
 init()

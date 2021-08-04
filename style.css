@@ -10,15 +10,6 @@
     font-style: italic;
 }
 
-#title-banner>img{
-    width: 10%;
-    height: 10%;
-    float: right;
-    left: 0;
-    position: relative;
-    top: -50px
-}
-
 #title-banner>h3{
     text-align: left;
 }
@@ -28,9 +19,14 @@
     float: left;
 }
 
-#title-banner>.dropdown{
+#title-banner>button{
     text-align: left;
     float: left;
+}
+
+#title-banner>.navbar{
+    text-align: right;
+    float: right;
 }
 
 #Thank-you{
