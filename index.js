@@ -72,7 +72,8 @@ function showProducts(product) {
 
     dislikeClick.addEventListener('click',() =>{
         likeCounter--
-        patchReviewCount()
+        product.countReview--
+        patchReviewCount(product)
         productReviewCount.innerText = `Number of Reviews for this product: ${product.countReview}.`
         return likePhrase.innerText = `This product has ${likeCounter} like(s). Click the emoji to let us know what you think of it! `
     })
