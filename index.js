@@ -3,6 +3,7 @@ function init() {
     productRender()
     imageClick()
     navBarClicks()
+    purchaseBox()
 }
 
 
@@ -26,6 +27,7 @@ function productRender() {
 //     });
 
 const priceArrays = []
+
 function showProducts(product) {
     const pContainer = document.getElementById('products-container')
     const productCard = document.createElement('div');
@@ -41,6 +43,10 @@ function showProducts(product) {
     const lowRangebtn = document.getElementById('low-range');
     const highRangebtn = document.getElementById('high-range');
     const allRangebtn = document.getElementById('all-range');
+    const likeClick = document.createElement('p')
+    const dislikeClick = document.createElement('p')
+    const likePhrase = document.createElement('p')
+    let likeCounter = 0
 
     productCard.setAttribute('id', `product ${product.asin}`);
     productCard.setAttribute('class', 'product-card')
@@ -48,14 +54,23 @@ function showProducts(product) {
     productImg.src = `${product.imgUrl}`;
     productRating.innerText = `${product.productRating}`;
     productPrice.innerText = `Price: $${product.price}`;
-  
+    likeClick.innerText='👍';
+    dislikeClick.innerText='👎';
+    likePhrase.innerHTML= `<em>This product has ${likeCounter} like(s). Click the emoji to let us know what you think!</em>`
     productPrime.innerText = 'Is this product exclusive for PRIME Members? ' + primeCheck();
-
     productDescript.innerText = product.productDescription;
     productBuyButton.innerText = 'Buy';
 
-    productCard.append(productImg, productRating, productDescript, productPrime, productPrice, productBuyButton, lineBreak)
+    productCard.append(productImg, productRating, likeClick, likePhrase,dislikeClick,productDescript, productPrime, productPrice, productBuyButton, lineBreak)
     pContainer.appendChild(productCard)
+
+    likeClick.addEventListener('click',() =>{
+        likeCounter+=1
+    })
+
+    dislikeClick.addEventListener('click',() =>{
+        likeCounter-=1
+    })
 
 
     function primeCheck() {
@@ -92,7 +107,7 @@ function showProducts(product) {
             priceTotal.innerText = `Total : ${currentPrice - product.price} `
         })
     })
-        lowRangebtn.addEventListener('click', e =>{
+    lowRangebtn.addEventListener('click', e =>{
         if (product.price > 20){
          productCard.style ='display : none'
          lowRangebtn.style.color='purple'
@@ -128,11 +143,6 @@ function showProducts(product) {
         onlyPrimeProds.style.color=''
     })
 })
-
-
-
-
-
 }
 
 function purchaseBox() {
@@ -144,7 +154,6 @@ function purchaseBox() {
     })
 
 }
-purchaseBox()
 
 function navBarClicks(){
     const navListProd = document.querySelector('#product-nav')
