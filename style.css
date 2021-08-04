@@ -53,10 +53,10 @@ body{
     padding:30px;
 }
 
-.product-cards{
+.product-card{
     padding: 2px 16px;
     box-shadow: 0 0 3px rgba(190, 25, 25, 0.1);
-    outline: 500px solid black;
+    outline: 5px solid black;
     border: 1px solid black;
 }
 
@@ -78,4 +78,34 @@ body{
 #total-price{
     font-size: 35px;
     color:blue;
+}
+.navbar{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+nav{
+    flex: 1;
+    text-align: right;
+}
+nav ul{
+    display: inline-block;
+    list-style-type: none;
+}
+nav li{
+    display: inline-block;
+    margin-right: 20px;
+}
+a{
+    text-decoration: none;
+    color: #555;
+}
+p{
+    color: #555;
+}
+.container{
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 5px;
+    padding-right: 5px;
 }
