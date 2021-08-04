@@ -2,23 +2,23 @@ function init() {
     productRender()
 }
 
-// fetch("https://axesso-axesso-amazon-data-service-v1.p.rapidapi.com/amz/amazon-seller-products?domainCode=com&sellerId=AD97MR4NOW5CD&page=1", {
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-key": "0ea4ca4479msh35a0d514694fec8p1b3d3ejsn2f6692e1d189",
-// 		"x-rapidapi-host": "axesso-axesso-amazon-data-service-v1.p.rapidapi.com"
-// 	}
-// })
-// .then(res => res.json())
-// .then(products => console.log(products))
-// .catch(err => {
-// 	console.error(err);
-// });
+// // fetch("https://axesso-axesso-amazon-data-service-v1.p.rapidapi.com/amz/amazon-seller-products?domainCode=com&sellerId=AD97MR4NOW5CD&page=1", {
+// //     "method": "GET",
+// //     "headers": {
+// //         "x-rapidapi-key": "0ea4ca4479msh35a0d514694fec8p1b3d3ejsn2f6692e1d189",
+// //         "x-rapidapi-host": "axesso-axesso-amazon-data-service-v1.p.rapidapi.com"
+// //     }
+// // })
+//     .then(res => res.json())
+//     .then(products => console.log(products))
+//     .catch(err => {
+//         console.error(err);
+//     });
 
 function productRender() {
     productList.forEach(product => showProducts(product))
 }
-
+const priceArrays = []
 function showProducts(product) {
     const pContainer = document.getElementById('products-container')
     const productCard = document.createElement('div');
@@ -45,7 +45,7 @@ function showProducts(product) {
     productDescript.innerText = product.productDescription;
     productBuyButton.innerText = 'Buy';
 
-    productCard.append(productImg, productRating, productPrice, productPrime, productDescript, productBuyButton, lineBreak)
+    productCard.append(productImg, productRating, productDescript, productPrime, productPrice, productBuyButton, lineBreak)
     pContainer.appendChild(productCard)
 
     function primeCheck() {
@@ -57,8 +57,16 @@ function showProducts(product) {
     }
 
     productBuyButton.addEventListener("click", function (e) {
+        e.preventDefault()
         const priceTotal = document.querySelector("#total-price")
         const shoppingCart = document.querySelector("#shopping-bag")
+        priceArrays.push(product.price)
+        console.log(priceArrays)
+        const currentPrice = priceArrays.reduce(function (sum, current) {
+            return sum + current;
+        }, 0)
+        console.log(currentPrice)
+
         const newCard = e.target.parentElement
         shoppingCart.append(newCard)
         productBuyButton.remove()
@@ -69,7 +77,7 @@ function showProducts(product) {
         newCard.appendChild(removeButton)
         removeButton.innerText = "Remove"
         showProducts(product)
-        priceTotal.innerText = `Total : ${product.price}`
+        priceTotal.innerText = `Total : ${currentPrice}`
 
 
 
@@ -116,7 +124,23 @@ function showProducts(product) {
 
 }
 
+function purchaseBox() {
+    const alertButton = document.getElementById("checkout")
+    alertButton.addEventListener("click", function () {
+
+        alert("Thank you for your purchase")
+
+    })
+
+}
+purchaseBox()
+
 
 
 init()
+
+
+
+
+
 
