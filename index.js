@@ -12,7 +12,6 @@ function productRender() {
 }
 
 //Shows products on screen and adds site functionality
-=======
 // // fetch("https://axesso-axesso-amazon-data-service-v1.p.rapidapi.com/amz/amazon-seller-products?domainCode=com&sellerId=AD97MR4NOW5CD&page=1", {
 // //     "method": "GET",
 // //     "headers": {
@@ -77,13 +76,8 @@ function showProducts(product) {
             return sum + current;
         }, 0)
         console.log(currentPrice)
-
         const newCard = e.target.parentElement
         shoppingCart.append(newCard)
-
-    })
-
-
         productBuyButton.remove()
         productRating.remove()
         productDescript.remove()
@@ -93,15 +87,10 @@ function showProducts(product) {
         removeButton.innerText = "Remove"
         showProducts(product)
         priceTotal.innerText = `Total : ${currentPrice}`
-
-
-
         removeButton.addEventListener("click", function (e) {
             newCard.remove()
             priceTotal.innerText = `Total : ${currentPrice - product.price} `
         })
-    })
-
     })
         lowRangebtn.addEventListener('click', e =>{
         if (product.price > 20){
@@ -138,33 +127,8 @@ function showProducts(product) {
         productCard.style =''
         onlyPrimeProds.style.color=''
     })
-}
+})
 
-//Used to allow user to click on image in top banner to go to Shopping Cart
-function imageClick(){
-    const cartImage = document.querySelector('img')
-    const cartBag = document.getElementById('shopping-bag')
-    
-    cartImage.addEventListener('click', () =>{
-        cartBag.scrollIntoView();
-        
-    })
-}
-
-function navBarClicks(){
-    const navListProd = document.querySelector('#product-nav')
-    const navListCart = document.querySelector('#cart-nav')
-    const productPage = document.getElementById('products-container')
-    const cartSect = document.getElementById('shopping-bag')
-    
-    navListProd.addEventListener('click', ()=>{
-        productPage.scrollIntoView();
-    })
-
-    navListCart.addEventListener('click', ()=>{
-        cartSect.scrollIntoView();
-    })  
-}
 
 
 
@@ -182,8 +146,30 @@ function purchaseBox() {
 }
 purchaseBox()
 
+function navBarClicks(){
+    const navListProd = document.querySelector('#product-nav')
+    const navListCart = document.querySelector('#cart-nav')
+    const productPage = document.getElementById('products-container')
+    const cartSect = document.getElementById('shopping-bag')
+    
+    navListProd.addEventListener('click', ()=>{
+        productPage.scrollIntoView();
+    })
 
+    navListCart.addEventListener('click', ()=>{
+        cartSect.scrollIntoView();
+    })  
+}
+
+//Used to allow user to click on image in top banner to go to Shopping Cart
+function imageClick(){
+    const cartImage = document.querySelector('img')
+    const cartBag = document.getElementById('shopping-bag')
+    
+    cartImage.addEventListener('click', () =>{
+        cartBag.scrollIntoView();
+        
+    })
+}
 
 init()
-
-
