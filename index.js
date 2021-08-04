@@ -1,7 +1,18 @@
+//initializer function
 function init() {
     productRender()
+    imageClick()
+    navBarClicks()
 }
 
+
+//iterates over product list to render
+function productRender() {
+    productList.forEach(product => showProducts(product))
+}
+
+//Shows products on screen and adds site functionality
+=======
 // // fetch("https://axesso-axesso-amazon-data-service-v1.p.rapidapi.com/amz/amazon-seller-products?domainCode=com&sellerId=AD97MR4NOW5CD&page=1", {
 // //     "method": "GET",
 // //     "headers": {
@@ -15,9 +26,6 @@ function init() {
 //         console.error(err);
 //     });
 
-function productRender() {
-    productList.forEach(product => showProducts(product))
-}
 const priceArrays = []
 function showProducts(product) {
     const pContainer = document.getElementById('products-container')
@@ -41,12 +49,15 @@ function showProducts(product) {
     productImg.src = `${product.imgUrl}`;
     productRating.innerText = `${product.productRating}`;
     productPrice.innerText = `Price: $${product.price}`;
+  
     productPrime.innerText = 'Is this product exclusive for PRIME Members? ' + primeCheck();
+
     productDescript.innerText = product.productDescription;
     productBuyButton.innerText = 'Buy';
 
     productCard.append(productImg, productRating, productDescript, productPrime, productPrice, productBuyButton, lineBreak)
     pContainer.appendChild(productCard)
+
 
     function primeCheck() {
         if (product.prime) {
@@ -69,6 +80,10 @@ function showProducts(product) {
 
         const newCard = e.target.parentElement
         shoppingCart.append(newCard)
+
+    })
+
+
         productBuyButton.remove()
         productRating.remove()
         productDescript.remove()
@@ -87,38 +102,69 @@ function showProducts(product) {
         })
     })
 
-    lowRangebtn.addEventListener('click', e => {
-        if (product.price > 20) {
-            productCard.style = 'display : none'
-            lowRangebtn.style.color = 'purple'
+    })
+        lowRangebtn.addEventListener('click', e =>{
+        if (product.price > 20){
+         productCard.style ='display : none'
+         lowRangebtn.style.color='purple'
+         highRangebtn.style ='display: none'
         }
     })
 
-    highRangebtn.addEventListener('click', e => {
-        if (product.price < 20) {
-            productCard.style = 'display : none'
-            highRangebtn.style.color = 'purple'
+    highRangebtn.addEventListener('click', e =>{
+        if (product.price < 20){
+         productCard.style ='display : none'
+         highRangebtn.style.color='purple'
+         lowRangebtn.style ='display: none'
         }
     })
 
-    allRangebtn.addEventListener('click', e => {
-        productCard.style = ''
-        lowRangebtn.style.color = ''
-        highRangebtn.style.color = ''
-    })
+    allRangebtn.addEventListener('click', e =>{
+         productCard.style =''
+         lowRangebtn.style.color=''
+         highRangebtn.style.color=''
+         lowRangebtn.style =''
+         highRangebtn.style =''
 
-    onlyPrimeProds.addEventListener('click', e => {
-        if (productPrime.innerText == 'Is this product exclusive for PRIME Members? No') {
-            productCard.style = 'display : none'
-            onlyPrimeProds.style.color = 'purple'
+    onlyPrimeProds.addEventListener('click', e =>{
+        if (productPrime.innerText=='Is this product exclusive for PRIME Members? No'){
+        productCard.style ='display : none'
+        onlyPrimeProds.style.color='purple'
         }
     })
 
-    allProds.addEventListener('click', e => {
-        productCard.style = ''
-        onlyPrimeProds.style.color = ''
+
+    allProds.addEventListener('click', e =>{
+        productCard.style =''
+        onlyPrimeProds.style.color=''
+    })
+}
+
+//Used to allow user to click on image in top banner to go to Shopping Cart
+function imageClick(){
+    const cartImage = document.querySelector('img')
+    const cartBag = document.getElementById('shopping-bag')
+    
+    cartImage.addEventListener('click', () =>{
+        cartBag.scrollIntoView();
+        
+    })
+}
+
+function navBarClicks(){
+    const navListProd = document.querySelector('#product-nav')
+    const navListCart = document.querySelector('#cart-nav')
+    const productPage = document.getElementById('products-container')
+    const cartSect = document.getElementById('shopping-bag')
+    
+    navListProd.addEventListener('click', ()=>{
+        productPage.scrollIntoView();
     })
 
+    navListCart.addEventListener('click', ()=>{
+        cartSect.scrollIntoView();
+    })  
+}
 
 
 
