@@ -9,23 +9,11 @@ function init() {
 
 //iterates over product list to render
 function productRender() {
-    //productList.forEach(product => showProducts(product))
-    fetch("https://axesso-axesso-amazon-data-service-v1.p.rapidapi.com/amz/amazon-seller-products?domainCode=com&sellerId=AD97MR4NOW5CD&page=1", {
-    "method": "GET",
-    "headers": {
-        "x-rapidapi-key": "0ea4ca4479msh35a0d514694fec8p1b3d3ejsn2f6692e1d189",
-        "x-rapidapi-host": "axesso-axesso-amazon-data-service-v1.p.rapidapi.com"
-    }
-})
+    fetch('http://localhost:8000/productList')
     .then(res => res.json())
-    .then(products => products.forEach(products.searchProductDetails))
-    .catch(err => {
-        console.error(err);
-    });
+    .then(products => products.forEach(showProducts))
+    .catch(err => console.error(err))
 }
-
-
-
 const priceArrays = []
 
 function showProducts(product) {
@@ -38,6 +26,7 @@ function showProducts(product) {
     const productPrime = document.createElement('p');
     const productDescript = document.createElement('span');
     const productBuyButton = document.createElement('button');
+    const productReviewCount = document.createElement('span')
     const onlyPrimeProds = document.getElementById('prime-btn');
     const allProds = document.getElementById('all-btn');
     const lowRangebtn = document.getElementById('low-range');
@@ -60,21 +49,10 @@ function showProducts(product) {
     productPrime.innerText = 'Is this product exclusive for PRIME Members? ' + primeCheck();
     productDescript.innerText = product.productDescription;
     productBuyButton.innerText = 'Buy';
+    productReviewCount.innerHTML = `Number of Reviews for this product: ${product.countReview}.`
 
-    productCard.append(productImg, productRating, likeClick, likePhrase, dislikeClick, productDescript, productPrime, productPrice, productBuyButton, lineBreak)
+    productCard.append(productImg, productRating, likeClick, likePhrase, dislikeClick, productDescript, productPrime, productPrice, productBuyButton, lineBreak, productReviewCount)
     pContainer.appendChild(productCard)
-
-    likeClick.addEventListener('click',() =>{
-        likeCounter++
-        return likePhrase.innerHTML = `This product has ${likeCounter} like(s). Click the emoji to let us know what you think of it! `
-        
-    })
-
-    dislikeClick.addEventListener('click',() =>{
-        likeCounter--
-        return likePhrase.innerText = `This product has ${likeCounter} like(s). Click the emoji to let us know what you think of it! `
-    })
-
 
     function primeCheck() {
         if (product.prime) {
@@ -83,6 +61,33 @@ function showProducts(product) {
             return 'No'
         }
     }
+    
+    likeClick.addEventListener('click',() =>{
+        likeCounter++
+        product.countReview++
+        patchReviewCount(product)
+        return likePhrase.innerHTML = `This product has ${likeCounter} like(s). Click the emoji to let us know what you think of it! `
+        
+    })
+
+    dislikeClick.addEventListener('click',() =>{
+        likeCounter--
+        patchReviewCount()
+        return likePhrase.innerText = `This product has ${likeCounter} like(s). Click the emoji to let us know what you think of it! `
+    })
+
+
+    function patchReviewCount(product){
+        fetch(`http://localhost:8000/productList/${product.id}`,{
+            method : 'PATCH',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(product)
+    })
+    .then(res => res.json())
+    .then(product => console.log(product))
+
 
     productBuyButton.addEventListener("click", function (e) {
         e.preventDefault()
@@ -147,7 +152,7 @@ function showProducts(product) {
         onlyPrimeProds.style.color=''
     })
 })
-}
+}}
 
 function purchaseBox() {
     const alertButton = document.getElementById("checkout")
