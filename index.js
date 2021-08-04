@@ -83,6 +83,7 @@ function showProducts(product) {
 
         removeButton.addEventListener("click", function (e) {
             newCard.remove()
+            priceTotal.innerText = `Total : ${currentPrice - product.price} `
         })
     })
 
@@ -138,9 +139,5 @@ purchaseBox()
 
 
 init()
-
-
-
-
 
 
