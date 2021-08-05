@@ -24,12 +24,14 @@ function navBarClicks() {
     const productPage = document.getElementById('products-container')
     const cartSect = document.getElementById('shopping-bag')
 
-    navListProd.addEventListener('click', ()=>{
+    navListProd.addEventListener('click', e=>{
+        e.preventDefault();
         productPage.scrollIntoView();
     })
     
     
-    navListCart.addEventListener('click', ()=>{
+    navListCart.addEventListener('click', e =>{
+        e.preventDefault();
         cartSect.scrollIntoView();
     })  
     
