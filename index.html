@@ -15,7 +15,6 @@
         <h3>Protip: Use the filters below!</h3>
         <img src='https://static.onecms.io/wp-content/uploads/sites/23/2013/12/12/best-day-after-christmas-sales-shopping-guide-how-to.jpg'
             alt='click here to go to your shopping bag!' title="My Shopping Bag">
-
         <label for='clothingprice'>Choose Price Range:</label>
         <button type='button' id='low-range'>Low Range</button>
         <button type='button' id='high-range'>High Range</button>
@@ -32,39 +31,38 @@
             <nav>
                 <ul>
                     <li>Home</li>
-                    <li>Products</li>
-                    <li>Cart</li>
+                    <li id='product-nav'><a href>Products</a></li>
+                    <li id='cart-nav'>Cart</li>
                 </ul>
             </nav>
-
         </div>
         <div class="row">
             <div class="col">
                 <h1>Products Page</h1>
-
             </div>
-            <div class="col"></div>
+            <div class="col">
+                <form class="add-clothes">
+                    <h3>Add clothes!</h3>
 
+                    <input type="text" name="name" value="" placeholder="Enter Clothes Title" class="input-text" />
+                    <br />
+                    <input type="text" name="image" value="" placeholder="Enter Clothes Image url" class="input-text" />
+                    <br />
+                    <input type="submit" name="submit" value="Create clothes" class="submit" />
+                </form>
+            </div>
         </div>
     </div>
     <div id='products-container'>
-
     </div>
     <div>
         <h2>/* Your Shopping Bag */</h2>
         <h5>See Below What You'd Like to Purchase</h5>
         <p id='total-price'>Total:</p>
-        <button type='button'>I want these!</button>
+        <button type='button' id="checkout">I want these!</button>
         <div id='shopping-bag'>
-
         </div>
-
-
     </div>
-
-
-
 </body>
-
 
 </html>
