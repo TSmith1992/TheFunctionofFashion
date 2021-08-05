@@ -1,7 +1,17 @@
+//initializer function
 function init() {
     productRender()
+    imageClick()
+    navBarClicks()
 }
 
+
+//iterates over product list to render
+function productRender() {
+    productList.forEach(product => showProducts(product))
+}
+
+//Shows products on screen and adds site functionality
 // // fetch("https://axesso-axesso-amazon-data-service-v1.p.rapidapi.com/amz/amazon-seller-products?domainCode=com&sellerId=AD97MR4NOW5CD&page=1", {
 // //     "method": "GET",
 // //     "headers": {
@@ -14,10 +24,7 @@ function init() {
 //     .catch(err => {
 //         console.error(err);
 //     });
-
-function productRender() {
-    productList.forEach(product => showProducts(product))
-}
+const shopArray = []
 const priceArrays = []
 function showProducts(product) {
     const pContainer = document.getElementById('products-container')
@@ -41,12 +48,15 @@ function showProducts(product) {
     productImg.src = `${product.imgUrl}`;
     productRating.innerText = `${product.productRating}`;
     productPrice.innerText = `Price: $${product.price}`;
+
     productPrime.innerText = 'Is this product exclusive for PRIME Members? ' + primeCheck();
+
     productDescript.innerText = product.productDescription;
     productBuyButton.innerText = 'Buy';
 
     productCard.append(productImg, productRating, productDescript, productPrime, productPrice, productBuyButton, lineBreak)
     pContainer.appendChild(productCard)
+
 
     function primeCheck() {
         if (product.prime) {
@@ -55,19 +65,24 @@ function showProducts(product) {
             return 'No'
         }
     }
+    function isPrice(price) {
+        return price.price
+    }
 
     productBuyButton.addEventListener("click", function (e) {
         e.preventDefault()
         const priceTotal = document.querySelector("#total-price")
         const shoppingCart = document.querySelector("#shopping-bag")
-        priceArrays.push(product.price)
+        shopArray.push(product)
+        console.log(shopArray)
+        priceArrays.push(isPrice(product))
         console.log(priceArrays)
         const currentPrice = priceArrays.reduce(function (sum, current) {
-            return sum + current;
+            return Math.floor(sum + current);
         }, 0)
         console.log(currentPrice)
-
         const newCard = e.target.parentElement
+        newCard.setAttribute("class", "new-card")
         shoppingCart.append(newCard)
         productBuyButton.remove()
         productRating.remove()
@@ -78,53 +93,58 @@ function showProducts(product) {
         removeButton.innerText = "Remove"
         showProducts(product)
         priceTotal.innerText = `Total : ${currentPrice}`
-
-
-
         removeButton.addEventListener("click", function (e) {
             newCard.remove()
             priceTotal.innerText = `Total : ${currentPrice - product.price} `
+            shopArray.shift(product)
+            priceArrays.shift(product)
+
+
         })
+        lowRangebtn.addEventListener('click', e => {
+            if (product.price > 20) {
+                productCard.style = 'display : none'
+                lowRangebtn.style.color = 'purple'
+                highRangebtn.style = 'display: none'
+            }
+        })
+
+        highRangebtn.addEventListener('click', e => {
+            if (product.price < 20) {
+                productCard.style = 'display : none'
+                highRangebtn.style.color = 'purple'
+                lowRangebtn.style = 'display: none'
+            }
+        })
+
+        allRangebtn.addEventListener('click', e => {
+            productCard.style = ''
+            lowRangebtn.style.color = ''
+            highRangebtn.style.color = ''
+            lowRangebtn.style = ''
+            highRangebtn.style = ''
+
+            onlyPrimeProds.addEventListener('click', e => {
+                if (productPrime.innerText == 'Is this product exclusive for PRIME Members? No') {
+                    productCard.style = 'display : none'
+                    onlyPrimeProds.style.color = 'purple'
+                }
+            })
+
+
+            allProds.addEventListener('click', e => {
+                productCard.style = ''
+                onlyPrimeProds.style.color = ''
+            })
+        })
+
+
+
+
+
     })
-
-    lowRangebtn.addEventListener('click', e => {
-        if (product.price > 20) {
-            productCard.style = 'display : none'
-            lowRangebtn.style.color = 'purple'
-        }
-    })
-
-    highRangebtn.addEventListener('click', e => {
-        if (product.price < 20) {
-            productCard.style = 'display : none'
-            highRangebtn.style.color = 'purple'
-        }
-    })
-
-    allRangebtn.addEventListener('click', e => {
-        productCard.style = ''
-        lowRangebtn.style.color = ''
-        highRangebtn.style.color = ''
-    })
-
-    onlyPrimeProds.addEventListener('click', e => {
-        if (productPrime.innerText == 'Is this product exclusive for PRIME Members? No') {
-            productCard.style = 'display : none'
-            onlyPrimeProds.style.color = 'purple'
-        }
-    })
-
-    allProds.addEventListener('click', e => {
-        productCard.style = ''
-        onlyPrimeProds.style.color = ''
-    })
-
-
-
-
 
 }
-
 function purchaseBox() {
     const alertButton = document.getElementById("checkout")
     alertButton.addEventListener("click", function () {
@@ -136,8 +156,40 @@ function purchaseBox() {
 }
 purchaseBox()
 
+function navBarClicks() {
+    const navListProd = document.querySelector('#product-nav')
+    const navListCart = document.querySelector('#cart-nav')
+    const productPage = document.getElementById('products-container')
+    const cartSect = document.getElementById('shopping-bag')
+
+    navListProd.addEventListener('click', () => {
+        productPage.scrollIntoView();
+    })
+
+    navListCart.addEventListener('click', () => {
+        cartSect.scrollIntoView();
+    })
+}
+
+//Used to allow user to click on image in top banner to go to Shopping Cart
+function imageClick() {
+    const cartImage = document.querySelector('img')
+    const cartBag = document.getElementById('shopping-bag')
+
+    cartImage.addEventListener('click', () => {
+        cartBag.scrollIntoView();
+
+    })
+}
+
+
+
+
+
 
 
 init()
+
+
 
 
