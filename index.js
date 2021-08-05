@@ -40,9 +40,16 @@ function navBarClicks() {
 function purchaseBox() {
     const alertButton = document.getElementById("checkout")
     alertButton.addEventListener("click", function () {
-
-        alert("Thank you for your purchase")
-
+        const thanksBanner = document.getElementById('Thank-you')
+        const shopBag = document.getElementById('shopping-bag')
+        console.log(shopBag.childElementCount)
+        
+        if (shopBag.childElementCount <1){
+            alert("Don't be shy. Buy something! 😊 ")
+        }else {
+            thanksBanner.style='display: block'
+            alert("Thank you for your purchase")   
+        }
     })
 
 }
