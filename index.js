@@ -1,3 +1,5 @@
+const shopArray = []
+
 const priceArrays = []
 
 //initializer function
@@ -42,10 +44,13 @@ function showProducts(product) {
     productImg.src = `${product.imgUrl}`;
     productRating.innerText = `${product.productRating}`;
     productPrice.innerText = `Price: $${product.price}`;
+
     likeClick.innerText='👍';
     dislikeClick.innerText='👎';
     likePhrase.innerText = `This product has ${likeCounter} like(s). Click the emoji to let us know what you think of it! `
+
     productPrime.innerText = 'Is this product exclusive for PRIME Members? ' + primeCheck();
+
     productDescript.innerText = product.productDescription;
     productBuyButton.innerText = 'Buy';
     productReviewCount.innerText = `Number of Reviews for this product: ${product.countReview}.`
@@ -53,12 +58,16 @@ function showProducts(product) {
     productCard.append(productImg, productRating, likeClick, likePhrase, dislikeClick, productDescript, productPrime, productPrice, productBuyButton, lineBreak, productReviewCount)
     pContainer.appendChild(productCard)
 
+
     function primeCheck() {
         if (product.prime) {
             return 'Yes'
         } else {
             return 'No'
         }
+    }
+    function isPrice(price) {
+        return price.price
     }
 
     likeClick.addEventListener('click',() =>{
@@ -103,7 +112,7 @@ function showProducts(product) {
         priceArrays.push(isPrice(product))
         console.log(priceArrays)
         const currentPrice = priceArrays.reduce(function (sum, current) {
-            return sum + current;
+            return Math.floor(sum + current);
         }, 0)
         console.log(currentPrice)
         const newCard = e.target.parentElement
@@ -176,15 +185,31 @@ function purchaseBox() {
 
 }
 
-function navBarClicks(){
+
+function navBarClicks() {
+
     const navListProd = document.querySelector('#product-nav')
     const navListCart = document.querySelector('#cart-nav')
     const productPage = document.getElementById('products-container')
     const cartSect = document.getElementById('shopping-bag')
+}
+
+//Used to allow user to click on image in top banner to go to Shopping Cart
+function imageClick() {
+    const cartImage = document.querySelector('img')
+    const cartBag = document.getElementById('shopping-bag')
+
+    cartImage.addEventListener('click', () => {
+        cartBag.scrollIntoView();
+
+    })
+}
+
     
     navListProd.addEventListener('click', ()=>{
         productPage.scrollIntoView();
     })
+
 
     navListCart.addEventListener('click', ()=>{
         cartSect.scrollIntoView();
@@ -192,3 +217,4 @@ function navBarClicks(){
 }
 
 init()
+
