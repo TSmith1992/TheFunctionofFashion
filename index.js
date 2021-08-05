@@ -94,6 +94,7 @@ function showProducts(product) {
             return 'No'
         }
     }
+
     likeClick.addEventListener('click',() =>{
         likeCounter++
         product.countReview++
@@ -151,18 +152,24 @@ function showProducts(product) {
 
     lowRangebtn.addEventListener('click', e =>{
         if (product.price > 20){
+            if (shopArray.includes(product)){
+                productCard.style =''
+            }else{
          productCard.style ='display : none'
          lowRangebtn.style.color='purple'
          highRangebtn.style ='display: none'
-        }
+        }}
     })
 
     highRangebtn.addEventListener('click', e =>{
         if (product.price < 20){
+                if (shopArray.includes(product)){
+                    productCard.style =''
+                }else{
          productCard.style ='display : none'
          highRangebtn.style.color='purple'
          lowRangebtn.style ='display: none'
-        }
+        }}
     })
 
     allRangebtn.addEventListener('click', e =>{
@@ -175,10 +182,13 @@ function showProducts(product) {
 
     onlyPrimeProds.addEventListener('click', e =>{
         if (productPrime.innerText=='Is this product exclusive for PRIME Members? No'){
+            if (shopArray.includes(product)){
+                productCard.style =''
+            }else{
         productCard.style ='display : none'
         onlyPrimeProds.style.color='purple'
         }
-    })
+    }})
 
 
     allProds.addEventListener('click', e =>{
