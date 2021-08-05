@@ -1,31 +1,22 @@
+const shopArray = []
+
+const priceArrays = []
+
 //initializer function
 function init() {
     productRender()
-    imageClick()
     navBarClicks()
+    purchaseBox()
 }
-
 
 //iterates over product list to render
 function productRender() {
-    productList.forEach(product => showProducts(product))
+    fetch('http://localhost:8000/productList')
+    .then(res => res.json())
+    .then(products => products.forEach(showProducts))
+    .catch(err => console.error(err))
 }
 
-//Shows products on screen and adds site functionality
-// // fetch("https://axesso-axesso-amazon-data-service-v1.p.rapidapi.com/amz/amazon-seller-products?domainCode=com&sellerId=AD97MR4NOW5CD&page=1", {
-// //     "method": "GET",
-// //     "headers": {
-// //         "x-rapidapi-key": "0ea4ca4479msh35a0d514694fec8p1b3d3ejsn2f6692e1d189",
-// //         "x-rapidapi-host": "axesso-axesso-amazon-data-service-v1.p.rapidapi.com"
-// //     }
-// // })
-//     .then(res => res.json())
-//     .then(products => console.log(products))
-//     .catch(err => {
-//         console.error(err);
-//     });
-const shopArray = []
-const priceArrays = []
 function showProducts(product) {
     const pContainer = document.getElementById('products-container')
     const productCard = document.createElement('div');
@@ -36,11 +27,16 @@ function showProducts(product) {
     const productPrime = document.createElement('p');
     const productDescript = document.createElement('span');
     const productBuyButton = document.createElement('button');
+    const productReviewCount = document.createElement('span')
     const onlyPrimeProds = document.getElementById('prime-btn');
     const allProds = document.getElementById('all-btn');
     const lowRangebtn = document.getElementById('low-range');
     const highRangebtn = document.getElementById('high-range');
     const allRangebtn = document.getElementById('all-range');
+    const likeClick = document.createElement('p')
+    const dislikeClick = document.createElement('p')
+    let likePhrase = document.createElement('p')
+    let likeCounter = 0
 
     productCard.setAttribute('id', `product ${product.asin}`);
     productCard.setAttribute('class', 'product-card')
@@ -49,12 +45,17 @@ function showProducts(product) {
     productRating.innerText = `${product.productRating}`;
     productPrice.innerText = `Price: $${product.price}`;
 
+    likeClick.innerText='👍';
+    dislikeClick.innerText='👎';
+    likePhrase.innerText = `This product has ${likeCounter} like(s). Click the emoji to let us know what you think of it! `
+
     productPrime.innerText = 'Is this product exclusive for PRIME Members? ' + primeCheck();
 
     productDescript.innerText = product.productDescription;
     productBuyButton.innerText = 'Buy';
+    productReviewCount.innerText = `Number of Reviews for this product: ${product.countReview}.`
 
-    productCard.append(productImg, productRating, productDescript, productPrime, productPrice, productBuyButton, lineBreak)
+    productCard.append(productImg, productRating, likeClick, likePhrase, dislikeClick, productDescript, productPrime, productPrice, productBuyButton, lineBreak, productReviewCount)
     pContainer.appendChild(productCard)
 
 
@@ -66,6 +67,39 @@ function showProducts(product) {
         }
     }
     function isPrice(price) {
+        return price.price
+    }
+
+    likeClick.addEventListener('click',() =>{
+        likeCounter++
+        product.countReview++
+        patchReviewCount(product)
+        productReviewCount.innerText = `Number of Reviews for this product: ${product.countReview}.`
+        return likePhrase.innerHTML = `This product has ${likeCounter} like(s). Click the emoji to let us know what you think of it! `
+        
+    })
+
+    dislikeClick.addEventListener('click',() =>{
+        likeCounter--
+        product.countReview--
+        patchReviewCount(product)
+        productReviewCount.innerText = `Number of Reviews for this product: ${product.countReview}.`
+        return likePhrase.innerText = `This product has ${likeCounter} like(s). Click the emoji to let us know what you think of it! `
+    })
+
+
+    function patchReviewCount(product){
+        fetch(`http://localhost:8000/productList/${product.id}`,{
+            method : 'PATCH',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(product)
+    })
+    .then(res => res.json())
+    .then(product => console.log(product))
+
+  function isPrice(price) {
         return price.price
     }
 
@@ -101,50 +135,46 @@ function showProducts(product) {
 
 
         })
-        lowRangebtn.addEventListener('click', e => {
-            if (product.price > 20) {
-                productCard.style = 'display : none'
-                lowRangebtn.style.color = 'purple'
-                highRangebtn.style = 'display: none'
-            }
-        })
-
-        highRangebtn.addEventListener('click', e => {
-            if (product.price < 20) {
-                productCard.style = 'display : none'
-                highRangebtn.style.color = 'purple'
-                lowRangebtn.style = 'display: none'
-            }
-        })
-
-        allRangebtn.addEventListener('click', e => {
-            productCard.style = ''
-            lowRangebtn.style.color = ''
-            highRangebtn.style.color = ''
-            lowRangebtn.style = ''
-            highRangebtn.style = ''
-
-            onlyPrimeProds.addEventListener('click', e => {
-                if (productPrime.innerText == 'Is this product exclusive for PRIME Members? No') {
-                    productCard.style = 'display : none'
-                    onlyPrimeProds.style.color = 'purple'
-                }
-            })
-
-
-            allProds.addEventListener('click', e => {
-                productCard.style = ''
-                onlyPrimeProds.style.color = ''
-            })
-        })
-
-
-
-
-
     })
 
-}
+    lowRangebtn.addEventListener('click', e =>{
+        if (product.price > 20){
+         productCard.style ='display : none'
+         lowRangebtn.style.color='purple'
+         highRangebtn.style ='display: none'
+        }
+    })
+
+    highRangebtn.addEventListener('click', e =>{
+        if (product.price < 20){
+         productCard.style ='display : none'
+         highRangebtn.style.color='purple'
+         lowRangebtn.style ='display: none'
+        }
+    })
+
+    allRangebtn.addEventListener('click', e =>{
+         productCard.style =''
+         lowRangebtn.style.color=''
+         highRangebtn.style.color=''
+         lowRangebtn.style =''
+         highRangebtn.style =''
+
+    onlyPrimeProds.addEventListener('click', e =>{
+        if (productPrime.innerText=='Is this product exclusive for PRIME Members? No'){
+        productCard.style ='display : none'
+        onlyPrimeProds.style.color='purple'
+        }
+    })
+
+
+    allProds.addEventListener('click', e =>{
+        productCard.style =''
+        onlyPrimeProds.style.color=''
+    })
+})
+}}
+
 function purchaseBox() {
     const alertButton = document.getElementById("checkout")
     alertButton.addEventListener("click", function () {
@@ -154,21 +184,14 @@ function purchaseBox() {
     })
 
 }
-purchaseBox()
+
 
 function navBarClicks() {
+
     const navListProd = document.querySelector('#product-nav')
     const navListCart = document.querySelector('#cart-nav')
     const productPage = document.getElementById('products-container')
     const cartSect = document.getElementById('shopping-bag')
-
-    navListProd.addEventListener('click', () => {
-        productPage.scrollIntoView();
-    })
-
-    navListCart.addEventListener('click', () => {
-        cartSect.scrollIntoView();
-    })
 }
 
 //Used to allow user to click on image in top banner to go to Shopping Cart
@@ -182,14 +205,16 @@ function imageClick() {
     })
 }
 
+    
+    navListProd.addEventListener('click', ()=>{
+        productPage.scrollIntoView();
+    })
 
 
-
-
-
+    navListCart.addEventListener('click', ()=>{
+        cartSect.scrollIntoView();
+    })  
+}
 
 init()
-
-
-
 
