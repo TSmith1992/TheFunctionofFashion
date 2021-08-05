@@ -17,6 +17,34 @@ function productRender() {
     .catch(err => console.error(err))
 }
 
+function navBarClicks() {
+
+    const navListProd = document.querySelector('#product-nav')
+    const navListCart = document.querySelector('#cart-nav')
+    const productPage = document.getElementById('products-container')
+    const cartSect = document.getElementById('shopping-bag')
+
+    navListProd.addEventListener('click', ()=>{
+        productPage.scrollIntoView();
+    })
+    
+    
+    navListCart.addEventListener('click', ()=>{
+        cartSect.scrollIntoView();
+    })  
+    
+}
+
+function purchaseBox() {
+    const alertButton = document.getElementById("checkout")
+    alertButton.addEventListener("click", function () {
+
+        alert("Thank you for your purchase")
+
+    })
+
+}
+
 function showProducts(product) {
     const pContainer = document.getElementById('products-container')
     const productCard = document.createElement('div');
@@ -66,10 +94,6 @@ function showProducts(product) {
             return 'No'
         }
     }
-    function isPrice(price) {
-        return price.price
-    }
-
     likeClick.addEventListener('click',() =>{
         likeCounter++
         product.countReview++
@@ -87,19 +111,7 @@ function showProducts(product) {
         return likePhrase.innerText = `This product has ${likeCounter} like(s). Click the emoji to let us know what you think of it! `
     })
 
-
-    function patchReviewCount(product){
-        fetch(`http://localhost:8000/productList/${product.id}`,{
-            method : 'PATCH',
-            headers: {
-                'Content-Type' : 'application/json'
-            },
-            body: JSON.stringify(product)
-    })
-    .then(res => res.json())
-    .then(product => console.log(product))
-
-  function isPrice(price) {
+    function isPrice(price) {
         return price.price
     }
 
@@ -159,6 +171,7 @@ function showProducts(product) {
          highRangebtn.style.color=''
          lowRangebtn.style =''
          highRangebtn.style =''
+    })
 
     onlyPrimeProds.addEventListener('click', e =>{
         if (productPrime.innerText=='Is this product exclusive for PRIME Members? No'){
@@ -172,49 +185,24 @@ function showProducts(product) {
         productCard.style =''
         onlyPrimeProds.style.color=''
     })
-})
+
+
+    function patchReviewCount(product){
+        fetch(`http://localhost:8000/productList/${product.id}`,{
+            method : 'PATCH',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(product)
+    })
+    .then(res => res.json())
+    .then(product => console.log(product))
 }}
 
-function purchaseBox() {
-    const alertButton = document.getElementById("checkout")
-    alertButton.addEventListener("click", function () {
-
-        alert("Thank you for your purchase")
-
-    })
-
-}
 
 
-function navBarClicks() {
 
-    const navListProd = document.querySelector('#product-nav')
-    const navListCart = document.querySelector('#cart-nav')
-    const productPage = document.getElementById('products-container')
-    const cartSect = document.getElementById('shopping-bag')
-}
 
-//Used to allow user to click on image in top banner to go to Shopping Cart
-function imageClick() {
-    const cartImage = document.querySelector('img')
-    const cartBag = document.getElementById('shopping-bag')
-
-    cartImage.addEventListener('click', () => {
-        cartBag.scrollIntoView();
-
-    })
-}
 
     
-    navListProd.addEventListener('click', ()=>{
-        productPage.scrollIntoView();
-    })
-
-
-    navListCart.addEventListener('click', ()=>{
-        cartSect.scrollIntoView();
-    })  
-}
-
 init()
-
