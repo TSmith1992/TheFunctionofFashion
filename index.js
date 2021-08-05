@@ -90,18 +90,24 @@ function showProducts(product) {
     .then(res => res.json())
     .then(product => console.log(product))
 
+  function isPrice(price) {
+        return price.price
+    }
 
     productBuyButton.addEventListener("click", function (e) {
         e.preventDefault()
         const priceTotal = document.querySelector("#total-price")
         const shoppingCart = document.querySelector("#shopping-bag")
-        priceArrays.push(product.price)
+        shopArray.push(product)
+        console.log(shopArray)
+        priceArrays.push(isPrice(product))
         console.log(priceArrays)
         const currentPrice = priceArrays.reduce(function (sum, current) {
             return sum + current;
         }, 0)
         console.log(currentPrice)
         const newCard = e.target.parentElement
+        newCard.setAttribute("class", "new-card")
         shoppingCart.append(newCard)
         productBuyButton.remove()
         productRating.remove()
@@ -115,6 +121,10 @@ function showProducts(product) {
         removeButton.addEventListener("click", function (e) {
             newCard.remove()
             priceTotal.innerText = `Total : ${currentPrice - product.price} `
+            shopArray.shift(product)
+            priceArrays.shift(product)
+
+
         })
     })
 
