@@ -1,16 +1,11 @@
-const shopArray = []
-
-//initializer function
-function init() {
-    fetchProducts()
-    navBarClicks()
-    purchaseBox()
-}
-
+const shopArray = [];
 let addClothes = false;
 const addBtn = document.querySelector("#new-btn");
 const clothesForm = document.querySelector(".content");
+const formBox = document.querySelector(".add-clothes");
 clothesForm.style.display = "none";
+
+//reveals form for user to add clothes
 addBtn.addEventListener("click", () => {
     // hide & seek with the form
     addClothes = !addClothes;
@@ -21,6 +16,14 @@ addBtn.addEventListener("click", () => {
     }
 
 });
+
+//initializer function
+function init() {
+    fetchProducts()
+    navBarClicks()
+    purchaseBox()
+}
+
 //iterates over product list to render
 function fetchProducts() {
     fetch('http://localhost:8000/productList')
@@ -29,6 +32,7 @@ function fetchProducts() {
         .catch(err => console.error(err))
 }
 
+//Gives functionality to NavBar at top
 function navBarClicks() {
 
     const navListProd = document.querySelector('#product-nav')
@@ -47,7 +51,8 @@ function navBarClicks() {
         cartSect.scrollIntoView();
     })
 }  
-    
+
+//Creates a check to ensure user has products in shopping bag before purchasing
 function purchaseBox() {
     const alertButton = document.getElementById("checkout")
     alertButton.addEventListener("click", function () {
@@ -63,6 +68,8 @@ function purchaseBox() {
         }
     })
 }
+
+//Main function - Renders products on page, allows user to buy products, and allows user to use filters for products
 function renderProduct(product) {
     const pContainer = document.getElementById('products-container')
     const productCard = document.createElement('div');
@@ -124,7 +131,7 @@ function renderProduct(product) {
 
     dislikeClick.addEventListener('click', () => {
         likeCounter--
-        product.countReview--
+        product.countReview++
         patchReviewCount(product)
         productReviewCount.innerText = `Number of Reviews for this product: ${product.countReview}.`
         return likePhrase.innerText = `This product has ${likeCounter} like(s). Click the emoji to let us know what you think of it! `
@@ -139,27 +146,23 @@ function renderProduct(product) {
     })
   
     lowRangebtn.addEventListener('click', e =>{
-        if (product.price > 20){
-            if (shopArray.includes(product)){
+        if (product.price > 20 && shopArray.includes(product)==false){
+            productCard.style ='display : none'
+            lowRangebtn.style.color='purple'
+            highRangebtn.style ='display: none'
+        } else if (shopArray.includes(product)){
                 productCard.style =''
-            }else{
-         productCard.style ='display : none'
-         lowRangebtn.style.color='purple'
-         highRangebtn.style ='display: none'
         }}
-    })
+    )
 
     highRangebtn.addEventListener('click', e =>{
-        if (product.price < 20){
-                if (shopArray.includes(product)){
-                    productCard.style =''
-                }else{
-         productCard.style ='display : none'
-         highRangebtn.style.color='purple'
-         lowRangebtn.style ='display: none'
-        }
-     }
-    })
+        if (product.price <= 20 && shopArray.includes(product)==false){
+            productCard.style ='display : none'
+            lowRangebtn.style.color='purple'
+            highRangebtn.style ='display: none'
+        } else if (shopArray.includes(product)){
+                productCard.style =''
+        }})
 
     allRangebtn.addEventListener('click', e =>{
          productCard.style =''
@@ -170,15 +173,13 @@ function renderProduct(product) {
     })
 
     onlyPrimeProds.addEventListener('click', e =>{
-        if (productPrime.innerText=='Is this product exclusive for PRIME Members? No'){
-            if (shopArray.includes(product)){
+        if (productPrime.innerText=='Is this product exclusive for PRIME Members? No' && shopArray.includes(product)==false){
+            productCard.style ='display : none'
+            lowRangebtn.style.color='purple'
+            highRangebtn.style ='display: none'
+        } else if (shopArray.includes(product)){
                 productCard.style =''
-            }else{
-        productCard.style ='display : none'
-        onlyPrimeProds.style.color='purple'
-        }
-    }
-})
+        }})
 
 
     allProds.addEventListener('click', e => {
@@ -198,6 +199,8 @@ function renderProduct(product) {
             .then(product => console.log(product))
     }
 }
+
+//Sends inputs in CREATE CLOTHES form to JSON Server
 function postFormBox(product) {
     fetch(`http://localhost:8000/productList/`, {
         method: 'POST',
@@ -209,7 +212,8 @@ function postFormBox(product) {
         .then(res => res.json())
         .then(product => console.log(product))
 }
-const formBox = document.querySelector(".add-clothes")
+
+//Saves inputs in CREATE CLOTHES box for POSTing in JSON Server
 formBox.addEventListener("submit", function (e) {
     e.preventDefault();
     const newClothesDisc = e.target.name.value
@@ -233,6 +237,7 @@ formBox.addEventListener("submit", function (e) {
 
 })
 
+//Renders to-be-purchased products in shopping cart
 function renderShoppingCart(products) {
     const shoppingCart = document.querySelector("#shopping-bag")
     shoppingCart.innerHTML = ""
@@ -240,6 +245,7 @@ function renderShoppingCart(products) {
     renderTotalPrice(products);
 }
 
+//Assigns values to cards in shopping cart and adds a REMOVE button to them
 function renderShoppingCartItem(product, index) {
     const shoppingCart = document.querySelector("#shopping-bag")
 
@@ -266,6 +272,8 @@ function renderShoppingCartItem(product, index) {
     })
 
 }
+
+//Calculates total price based on contents in Shopping Cart
 function renderTotalPrice(products) {
 
     const total = products.reduce((sum, current) => sum + current.price, 0);
