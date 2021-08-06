@@ -6,6 +6,7 @@ function init() {
     navBarClicks()
     purchaseBox()
 }
+
 let addClothes = false;
 const addBtn = document.querySelector("#new-btn");
 const clothesForm = document.querySelector(".content");
@@ -26,6 +27,7 @@ function fetchProducts() {
         .then(res => res.json())
         .then(products => products.forEach(renderProduct))
         .catch(err => console.error(err))
+}
 
 function navBarClicks() {
 
@@ -43,10 +45,9 @@ function navBarClicks() {
     navListCart.addEventListener('click', e =>{
         e.preventDefault();
         cartSect.scrollIntoView();
-    })  
+    })
+}  
     
-}
-
 function purchaseBox() {
     const alertButton = document.getElementById("checkout")
     alertButton.addEventListener("click", function () {
@@ -61,9 +62,7 @@ function purchaseBox() {
             alert("Thank you for your purchase")   
         }
     })
-
 }
-
 function renderProduct(product) {
     const pContainer = document.getElementById('products-container')
     const productCard = document.createElement('div');
@@ -158,7 +157,8 @@ function renderProduct(product) {
          productCard.style ='display : none'
          highRangebtn.style.color='purple'
          lowRangebtn.style ='display: none'
-        }}
+        }
+     }
     })
 
     allRangebtn.addEventListener('click', e =>{
@@ -177,7 +177,8 @@ function renderProduct(product) {
         productCard.style ='display : none'
         onlyPrimeProds.style.color='purple'
         }
-    }})
+    }
+})
 
 
     allProds.addEventListener('click', e => {
