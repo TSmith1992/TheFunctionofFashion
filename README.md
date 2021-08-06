@@ -10,6 +10,7 @@ API = https://rapidapi.com/axesso/api/axesso-amazon-data-service1/ (LookupSeller
 Deliverables:
 
 - Ensure products appear on page
+
 Each product appears on its own card with the following properties: 
 -   Title of product
 -   Description
@@ -31,5 +32,4 @@ Stretch Goals:
 
 - Filters/Dropdowns for Price, Rating, and Exclusivity for Prime Members
 - Ability to highlight/showcase a product
-- Add a search bar 
 - Dislike button that lowers the number of likes each piece of clothing has
