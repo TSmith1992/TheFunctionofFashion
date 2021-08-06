@@ -149,7 +149,6 @@ function renderProduct(product) {
         if (product.price > 20 && shopArray.includes(product)==false){
             productCard.style ='display : none'
             lowRangebtn.style.color='purple'
-            highRangebtn.style ='display: none'
         } else if (shopArray.includes(product)){
                 productCard.style =''
         }}
@@ -158,8 +157,7 @@ function renderProduct(product) {
     highRangebtn.addEventListener('click', e =>{
         if (product.price <= 20 && shopArray.includes(product)==false){
             productCard.style ='display : none'
-            lowRangebtn.style.color='purple'
-            highRangebtn.style ='display: none'
+            highRangebtn.style.color='purple'
         } else if (shopArray.includes(product)){
                 productCard.style =''
         }})

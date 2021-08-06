@@ -1,14 +1,17 @@
-
+a{
+    color: white;
+}
 #title-banner{
     background-color: lightskyblue;
-    background-image: url('https://www.bergerpaints.com/colour-magazine/Upload/Posting/Image/colours-fashion-banner-mar15.jpg');
+    background-image: url('https://t3.ftcdn.net/jpg/01/37/22/48/240_F_137224833_MTcalUgxQt8vUs2RMrNtxSgSmItDSv3f.jpg');
     background-size:contain;
     text-align: center;
+    height: 120px;
 }
 
 #title-banner>h1,h3{
     font-style: italic;
-    padding: 0;
+    font-family: "Bebas Neue";
 }
 
 #title-banner>h3{
@@ -26,29 +29,56 @@
 }
 
 #title-banner>.navbar{
-    text-align: center;
-    float: center;
+    text-align: right;
+    font-size: larger;
+    float: right;
+    font-family: "Bebas Neue";
+    margin-right: 20px;
+    font-size: x-large;
+}
+
+.navbar ul{
+    color:black;
+    
 }
 
 #Thank-you{
-    color: black;
+    color: yellow;
     font-style: italic;
 }
 
 body{
-    background-color: rgb(246, 235, 246);
+    background-color: whitesmoke;
+    background-image: url("https://cdn.wallpapersafari.com/63/27/grwaEK.png")
 }
 
 #products-container{
-    background-image: url('https://static.onecms.io/wp-content/uploads/sites/23/2018/03/19/affordable-work-clothes-1.jpg') ;
-    background-size:contain;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    background-image: url('https://a.rgbimg.com/users/p/pr/prawny/600/oGmeET6.jpg') ;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 1650px;
+    align-items: center;
     margin: auto;
-    width: 50%;
-    padding:30px;
+    font-family: "Bebas Neue";
+    /* margin-right: 2px */
+    color: black;
+
 }
+#container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-family: "Bebas Neue";
+}
+#container h1{
+    font-family: "Bebas Neue";
+    color:black;
+    font-size: xxx-large;
+}
+
+
 
 .product-card{
     padding: 2px 16px;
@@ -56,13 +86,18 @@ body{
     outline: 5px solid black;
     border: 1px solid black;
     background-color: white;
+    width: 420px;
+    height: 610px;
+    margin: 20px;
+    flex-shrink: 5;
+    color: black;
 }
 
 #shopping-bag{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    background-image: url('https://static.onecms.io/wp-content/uploads/sites/23/2013/12/12/best-day-after-christmas-sales-shopping-guide-how-to.jpg');
+    background-image: url('https://t3.ftcdn.net/jpg/01/37/22/48/240_F_137224833_MTcalUgxQt8vUs2RMrNtxSgSmItDSv3f.jpg');
     background-size: contain;
     color: black;
 	font-size: 20px;
@@ -72,25 +107,37 @@ body{
     text-align: center;
     color: rgb(34, 34, 8);
 	font-size: 20px;
-    text-shadow: black;
+    text-shadow: black
 }
 #total-price{
     font-size: 35px;
-    color:blue;
+    color:rgb(2, 73, 2);
 }
 
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  color: white;
+  text-decoration-line: underline;
+}
+.new-card{
+    padding: 2px 16px;
+    box-shadow: 0 0 3px rgba(190, 25, 25, 0.1);
+    outline: 5px solid black;
+    border: 1px solid black;
+    background-color: white;
+}
+#bottom-container{
+    background-image: url('https://t3.ftcdn.net/jpg/01/37/22/48/240_F_137224833_MTcalUgxQt8vUs2RMrNtxSgSmItDSv3f.jpg');
+    font-family: "Bebas Neue";
+    color: unset;
+    font-size: larger;
+}
+.image{
+    margin-left: 100px;
 }
 
-
-
-.new-card{
-padding: 2px 16px;
-box-shadow: 0 0 3px rgba(190, 25, 25, 0.1);
-outline: 5px solid black;
-border: 1px solid black;
-background-color: white;
+#checkout{
+    margin-bottom: 20px;
 }

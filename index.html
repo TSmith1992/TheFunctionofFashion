@@ -6,13 +6,12 @@
     <script type="text/javascript" src="productFile.js" defer></script>
     <script src='index.js' charset='utf-8' defer></script>
     <title>Clothing Store: Save Now!</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bebas+Neue&effect=3d%7Cshadow-multiple">
 </head>
 
 <body>
-    <div id='title-banner'>
-
-        <h1>Please choose below the clothes you want!</h1>
-              <div class="navbar">
+    <div id='title-banner' , class="font-effect-3d">
+        <div class="navbar">
             <nav>
                 <ul>
                     <li><em>Quick Clicks:</em></li>
@@ -21,12 +20,15 @@
                 </ul>
             </nav>
         </div>
+        <h1>Please choose below the clothes you want!</h1>
+
         <h1 hidden id='Thank-you'>Thank you for your purchase! </h1>
-        </div>
     </div>
+    <div id="container" , class="font-effect-3d">
+        <h1>Products Page</h1>
     </div>
     <div id='products-container'>
-        <h1>Products Page</h1>
+
         <h3>Protip: Use the filters below!</h3>
         <label for='clothingprice'>Choose Price Range:</label>
         <button type='button' id='low-range'>Low Range</button>
@@ -44,11 +46,9 @@
                 <form class="add-clothes">
                     <h3>Add clothes!</h3>
                     <input type="text" name="name" value="" placeholder="Enter Clothes Desc.." class="input-text" />
-                    <input type="text" name="image" value="" placeholder="Enter Clothes Image url"
-                        class="input-text" />
+                    <input type="text" name="image" value="" placeholder="Enter Clothes Image url" class="input-text" />
                     <br />
-                    <input type="text" name="exclusive" value="" placeholder="Prime Exclusive?"
-                        class="input-text" />
+                    <input type="text" name="exclusive" value="" placeholder="Prime Exclusive?" class="input-text" />
                     <input type="text" name="price" value="" placeholder="Enter Clothes Price" class="input-text" />
 
                     <input type="submit" name="submit" value="Create clothes" class="submit" />
@@ -59,7 +59,7 @@
             </p>
         </div>
     </div>
-    <div>
+    <div id="bottom-container" , class="font-effect-shadow-multiple">
         <h2>/* Your Shopping Bag */</h2>
         <h5>See Below What You'd Like to Purchase</h5>
         <p id='total-price'>Total:</p>
