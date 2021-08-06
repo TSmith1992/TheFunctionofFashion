@@ -232,6 +232,7 @@ formBox.addEventListener("submit", function (e) {
     }
     renderProduct(newclothesObj);
     postFormBox(newclothesObj);
+    formBox.reset();
 
 })
 
