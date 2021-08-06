@@ -26,7 +26,6 @@ function fetchProducts() {
         .then(res => res.json())
         .then(products => products.forEach(renderProduct))
         .catch(err => console.error(err))
-}
 
 function navBarClicks() {
 
@@ -35,29 +34,37 @@ function navBarClicks() {
     const productPage = document.getElementById('products-container')
     const cartSect = document.getElementById('shopping-bag')
 
-    navListProd.addEventListener('click', () => {
+    navListProd.addEventListener('click', e=>{
+        e.preventDefault();
         productPage.scrollIntoView();
     })
-
-
-    navListCart.addEventListener('click', () => {
+    
+    
+    navListCart.addEventListener('click', e =>{
+        e.preventDefault();
         cartSect.scrollIntoView();
-    })
-
+    })  
+    
 }
 
 function purchaseBox() {
     const alertButton = document.getElementById("checkout")
     alertButton.addEventListener("click", function () {
-
-        alert("Thank you for your purchase")
-
+        const thanksBanner = document.getElementById('Thank-you')
+        const shopBag = document.getElementById('shopping-bag')
+        console.log(shopBag.childElementCount)
+        
+        if (shopBag.childElementCount <1){
+            alert("Don't be shy. Buy something! 😊 ")
+        }else {
+            thanksBanner.style='display: block'
+            alert("Thank you for your purchase")   
+        }
     })
 
 }
 
 function renderProduct(product) {
-
     const pContainer = document.getElementById('products-container')
     const productCard = document.createElement('div');
     const lineBreak = document.createElement('hr')
@@ -124,7 +131,6 @@ function renderProduct(product) {
         return likePhrase.innerText = `This product has ${likeCounter} like(s). Click the emoji to let us know what you think of it! `
     })
 
-
     productBuyButton.addEventListener("click", function (e) {
         e.preventDefault()
         // const priceTotal = document.querySelector("#total-price")
@@ -132,56 +138,52 @@ function renderProduct(product) {
         renderShoppingCart(shopArray);
 
     })
+  
+    lowRangebtn.addEventListener('click', e =>{
+        if (product.price > 20){
+            if (shopArray.includes(product)){
+                productCard.style =''
+            }else{
+         productCard.style ='display : none'
+         lowRangebtn.style.color='purple'
+         highRangebtn.style ='display: none'
+        }}
+    })
 
-    lowRangebtn.addEventListener('click', e => {
-        if (product.price > 20) {
-            if (shopArray.includes(product)) {
-                productCard.style = ''
-            } else {
-                productCard.style = 'display : none'
-                lowRangebtn.style.color = 'purple'
-                highRangebtn.style = 'display: none'
-            }
+    highRangebtn.addEventListener('click', e =>{
+        if (product.price < 20){
+                if (shopArray.includes(product)){
+                    productCard.style =''
+                }else{
+         productCard.style ='display : none'
+         highRangebtn.style.color='purple'
+         lowRangebtn.style ='display: none'
+        }}
+    })
+
+    allRangebtn.addEventListener('click', e =>{
+         productCard.style =''
+         lowRangebtn.style.color=''
+         highRangebtn.style.color=''
+         lowRangebtn.style =''
+         highRangebtn.style =''
+    })
+
+    onlyPrimeProds.addEventListener('click', e =>{
+        if (productPrime.innerText=='Is this product exclusive for PRIME Members? No'){
+            if (shopArray.includes(product)){
+                productCard.style =''
+            }else{
+        productCard.style ='display : none'
+        onlyPrimeProds.style.color='purple'
         }
-    })
-
-    highRangebtn.addEventListener('click', e => {
-        if (product.price < 20) {
-            if (shopArray.includes(product)) {
-                productCard.style = ''
-            } else {
-                productCard.style = 'display : none'
-                highRangebtn.style.color = 'purple'
-                lowRangebtn.style = 'display: none'
-            }
-        }
-    })
-
-    allRangebtn.addEventListener('click', e => {
-        productCard.style = ''
-        lowRangebtn.style.color = ''
-        highRangebtn.style.color = ''
-        lowRangebtn.style = ''
-        highRangebtn.style = ''
-    })
-
-    onlyPrimeProds.addEventListener('click', e => {
-        if (productPrime.innerText == 'Is this product exclusive for PRIME Members? No') {
-            if (shopArray.includes(product)) {
-                productCard.style = ''
-            } else {
-                productCard.style = 'display : none'
-                onlyPrimeProds.style.color = 'purple'
-            }
-        }
-    })
+    }})
 
 
     allProds.addEventListener('click', e => {
         productCard.style = ''
         onlyPrimeProds.style.color = ''
     })
-
 
     function patchReviewCount(product) {
         fetch(`http://localhost:8000/productList/${product.id}`, {
